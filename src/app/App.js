@@ -6,53 +6,45 @@ import React, {
 
 import { connect } from 'react-redux';
 
-import * as ref from 'app/App.reference'; // eslint-disable-line
-
-const BankUser = repo => {
-	return (
-		<span className={'bank-user'} id={repo.id}>
-
-			<h2> { `${repo.name}` } </h2>
-
-			<h3> { `updated: ${new Date(repo.updated_at).toLocaleString()}` } </h3>
-
-			<span className={'owner-info'}>
-				<img src={repo.owner.avatar_url} alt={`${repo.name}-owner-avatar`} />
-				<h2> { `${repo.owner.login}` } </h2>
-			</span>
-
-		</span>
-	);
-};
+import NewUser from 'components/new-user/new-user.component';
+import BankUser from 'components/bank-user/bank-user.component';
 
 const App = () => {
 
 	const [ data, setData ] = useState( [] );
+	const [ loaded, setLoaded ] = useState( false );
 
 	useEffect( () => {
 		async function fetchData () {
-			const response = await fetch('https://api.github.com/users/nkxavis2907/repos').then( r => (r.ok) ? r.json() : null );
+			const config = { method:'GET' };
 
-			console.log( response )
+			const response = await fetch('http://localhost:5000/users', config ).then( r => r.json() );
+
+			console.log( response );
 			await setData( response );
+			await setLoaded( true );
 		};
 
 		fetchData();
 	}, [] );
 
-	return (
-		<div className="bank-application">
+	if ( loaded ) {
+		return (
+			<div className="bank-application">
+	
+				<header className={'app-title'}>
+					<h1> AWS Bank Application </h1>
+				</header>
+	
+				<section className={'bank-user-list'}>
+					{ (data.users).map( user => <BankUser user={user} /> )}
+				</section>
 
-			<header className="App-header">
-				<p> AWS Bank Application </p>
-			</header>
+				<NewUser />
 
-			<section className={'bank-user-list'}>
-				{ Object.values(data).map( repo => BankUser( repo ) )}
-			</section>
-
-		</div>
-	);
+			</div>
+		);
+	} else { return null };
 };
 
 export default connect(

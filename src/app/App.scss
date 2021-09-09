@@ -8,7 +8,7 @@ body {
 		max-width: 100%;
 		max-height: 100%;
 
-		font-size: 16px;
+		font-size: 1rem;
 		font-weight: 200;
 		font-family: 'Montserrat', sans-serif;
 	}
@@ -17,53 +17,59 @@ body {
 		margin: 0;
 		padding: 0;
 	}
+
+	input {
+		border: none;
+		padding: 8px 16px;
+		font-weight: 500;
+		border-radius: 4px;
+
+		&::placeholder {
+			font-weight: 400;
+		}
+
+		&:active, &:focus {
+			outline: none;
+		}
+	}
+
+	button {
+		border: none;
+		padding: 8px 24px;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
 }
 
 .bank-application {
 	@include flex-col;
+	gap: 12px;
 	width: 90vw;
+
+	.app-title {
+		margin: 24px 0;
+
+		h1 {
+			color: $txt-02;
+			font-size: 2rem;
+			font-weight: 500;
+		}
+	}
 
 	.bank-user-list {
 		gap: 24px;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
+	}
 
-		.bank-user {
-			gap: 12px;
-			padding: 16px 24px;
-			min-height: 72px;
-
-			display: flex;
-			flex-flow: column nowrap;
-			border-radius: 8px;
-			
-			color: $txt-03;
-			background: $dbg-02;
-			box-shadow: 0px 4px 8px 4px $sh-03;
-
-			h3 {
-				color: $txt-04;
-				font-size: 14px;
-			}
-
-			.owner-info {
-				@include flex-row;
-				gap: 8px;
-				flex-grow: 1;
-				justify-content: flex-start;
-
-				img {
-					width:  24px;
-					height: 24px;
-					border-radius: 32px;
-				}
-
-				h2 {
-					color: $txt-05;
-					font-size: 14px;
-				}
-			}
-		}
+	.submit-data {
+		margin: 12px 0 0;
+		border: none;
+		padding: 8px 32px;
+		font-weight: 600;
+		border-radius: 4px;
 	}
 }

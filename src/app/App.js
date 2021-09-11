@@ -4,41 +4,53 @@ import React, {
 	useEffect	,
 } from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import * as userAction from 'redux/user/user.actions';
 
+import Header from 'components/header/header.component';
 import NewUser from 'components/new-user/new-user.component';
 import BankUser from 'components/bank-user/bank-user.component';
+import BankOptions from 'components/bank-options/bank-options.component';
 
 const App = () => {
 
-	const [ data, setData ] = useState( [] );
+	// State
 	const [ loaded, setLoaded ] = useState( false );
 
-	useEffect( () => {
-		async function fetchData () {
-			const config = { method:'GET' };
+	// Redux State
+	const dispatch = useDispatch();
+	const userList = useSelector( state => state.user.userList );
+	const userActive = useSelector( state => state.user.userActive );
+	const dataUpdated = useSelector( state => state.data.dataUpdated );
 
-			const response = await fetch('http://localhost:5000/users', config ).then( r => r.json() );
+	// Functions
+	async function fetchData () {
+		const config = { method:'GET' };
 
-			console.log( response );
-			await setData( response );
-			await setLoaded( true );
-		};
+		const response = await fetch(`http://${window.location.hostname}:5000/users`, config ).then( r => r.json() );
 
-		fetchData();
-	}, [] );
+		console.log( response );
+		await dispatch( userAction.setList( response.users ) );
+		await dispatch( userAction.setActive( response.users[0] ) );
+		await setLoaded( true );
+
+		return response;
+	};
+
+
+	useEffect( () => fetchData(), [ dataUpdated ] ); // eslint-disable-line
 
 	if ( loaded ) {
+		console.log( userList );
+
 		return (
 			<div className="bank-application">
-	
-				<header className={'app-title'}>
-					<h1> AWS Bank Application </h1>
-				</header>
-	
-				<section className={'bank-user-list'}>
-					{ (data.users).map( user => <BankUser user={user} /> )}
-				</section>
+
+				<Header />
+		
+				<BankUser user={ userActive } />
+
+				<BankOptions />
 
 				<NewUser />
 
@@ -47,5 +59,4 @@ const App = () => {
 	} else { return null };
 };
 
-export default connect(
-)( App );
+export default App;

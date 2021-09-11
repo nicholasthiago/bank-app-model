@@ -1,8 +1,20 @@
 @import 'utils/design';
 
+html {
+	min-height: 100vh;
+	font-size: 16px;
+	background: linear-gradient(
+		$dbg-02,
+		$dbg-01,
+	);
+	background-size: contain;
+	background-repeat: space;
+}
+
 body {
 	@include flex-col;
-	background: $dbg-01;
+	padding: 4.8rem 0 0;
+	font-size: 16px;
 
 	* {
 		max-width: 100%;
@@ -10,7 +22,7 @@ body {
 
 		font-size: 1rem;
 		font-weight: 200;
-		font-family: 'Montserrat', sans-serif;
+		font-family: 'Montserrat', sans-serif !important;
 	}
 
 	h1,h2,h3,h4,h5,h6 {
@@ -43,26 +55,18 @@ body {
 	}
 }
 
+// ---- Dropdown Menu Config ---- //
+
 .bank-application {
 	@include flex-col;
 	gap: 12px;
-	width: 90vw;
+	width: 80vw;
 
-	.app-title {
-		margin: 24px 0;
-
-		h1 {
-			color: $txt-02;
-			font-size: 2rem;
-			font-weight: 500;
-		}
-	}
-
-	.bank-user-list {
+	.bank-balance-info {
 		gap: 24px;
 		width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr;
 	}
 
 	.submit-data {

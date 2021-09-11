@@ -3,9 +3,17 @@ import React, {
 } from 'react';
 import './new-user.styles.scss';
 
+import { useSelector, useDispatch } from 'react-redux'; // eslint-disable-line
+import * as dataAction from 'redux/data/data.actions';
+
 const NewUser = () => {
 
+	// Component State
 	const [ data, setData ] = useState( {} );
+
+	// Redux State
+	const dispatch = useDispatch();
+
 
 	function handle_Input ( input ) {
 		let _data = data;
@@ -27,13 +35,12 @@ const NewUser = () => {
 			const config = {
 				headers	: {'Accept':'application/json','Content-Type':'application/json'},
 				method	: 'POST'	,
-				mode	: 'no-cors'	,
 				body	: JSON.stringify( _data ),
 			};
 
-			console.log( config );
-
 			let response = await fetch('http://localhost:5000/users', config );
+
+			await dispatch( dataAction.setUpdated() );
 
 			return response;
 

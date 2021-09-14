@@ -42,7 +42,7 @@ const Header = () => {
 
 				<Avatar className={'user-avatar'}
 					onMouseDown={() => setDisplay( !display )}
-				>	{ userActive.user_name.charAt(0) }
+				>	{ userActive ? userActive.user_name.charAt(0) : 'U' }
 				</Avatar>
 
 				<Popover className={'user-change-dropdown'}

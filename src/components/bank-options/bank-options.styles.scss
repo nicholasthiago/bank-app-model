@@ -1,0 +1,49 @@
+@import 'utils/design';
+
+.bank-options-component {
+	width: 96vw;
+	margin: 24px 0 0;
+
+	.bank-options-flow {
+		@include flex-row;
+		gap: 16px;
+		overflow-x: auto;
+		min-width: none !important;
+		justify-content: flex-start;
+
+		// Hide Scrollbar
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		.bank-option {
+			@include flex-col;
+			gap: 0.5rem;
+			color: $txt-02;
+
+			h3 {
+				height: 2.4rem;
+				font-size: 0.8rem;
+				text-align: center;
+				font-weight: 400;
+			}
+
+			.icon-wrapper {
+				@include flex-col;
+				color: $txt-05;
+				width:  3.6rem;
+				height: 3.6rem;
+				background: $lbg-03;
+				border-radius: 64px;
+
+				svg {
+					width:  2.0rem;
+					height: 2.0rem;
+				}
+			}
+		}
+	}
+}

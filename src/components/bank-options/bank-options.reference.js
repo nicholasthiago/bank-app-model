@@ -2,35 +2,27 @@
 
 const ref = [
 	{
-		icon	: ''	,
+		icon	: 'Adjust'		,
 		label	: 'PIX'				,
 	},
 	{
-		icon	: ''	,
-		label	: 'Pay'				,
+		icon	: 'CreditCard'	,
+		label	: 'Cards'			,
 	},
 	{
-		icon	: ''	,
+		icon	: 'Loop'		,
 		label	: 'Transfer'		,
 	},
 	{
-		icon	: ''	,
-		label	: 'Deposit'			,
-	},
-	{
-		icon	: ''	,
-		label	: 'Borrow'			,
-	},
-	{
-		icon	: ''	,
+		icon	: 'AttachMoney'		,
 		label	: 'Cash in'			,
 	},
 	{
-		icon	: ''	,
+		icon	: 'ThumbUp'		,
 		label	: 'Donate'			,
 	},
 	{
-		icon	: ''	,
+		icon	: 'PersonAdd'		,
 		label	: 'Invite friends'	,
 	},
 ];

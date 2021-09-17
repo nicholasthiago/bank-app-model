@@ -19,7 +19,6 @@ const App = () => {
 
 	// Redux State
 	const dispatch = useDispatch();
-	const userList = useSelector( state => state.user.userList );
 	const userActive = useSelector( state => state.user.userActive );
 	const dataUpdated = useSelector( state => state.data.dataUpdated );
 
@@ -41,8 +40,6 @@ const App = () => {
 	useEffect( () => fetchData(), [ dataUpdated ] ); // eslint-disable-line
 
 	if ( loaded ) {
-		console.log( userList );
-
 		return (
 			<div className="bank-application">
 

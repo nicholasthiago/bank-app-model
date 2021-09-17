@@ -1,9 +1,12 @@
 import React from 'react';
 import './bank-user.styles.scss';
 
-import * as t from 'utils/tools/tools.js';
+import { useMasked } from 'hooks/hooks';
+
 
 const BankUser = ({ user }) => {
+
+	const [ balance, maskedBalance, setBalance ] = useMasked( user.user_balance, /\d(?=(\d{3})+\.)/g ) // eslint-disable-line
 
 	const dateTimeConfig = {
 		day		: 'numeric'	,
@@ -25,7 +28,7 @@ const BankUser = ({ user }) => {
 				</span>
 
 				<span className={'owner-info'}>
-					<h2> { `R$ ${ t.dataMask(user.user_balance) }` } </h2>
+					<h2> { `R$ ${ maskedBalance }` } </h2>
 					<h3> { `${ new Date(user.user_birth).toLocaleString('pt-BR', dateTimeConfig ) }` } </h3>
 				</span>
 

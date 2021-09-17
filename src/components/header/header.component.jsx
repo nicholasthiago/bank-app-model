@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // eslint-disable-line
 import './header.styles.scss';
+
+import { useToggle } from 'hooks/hooks';
 
 import { useSelector, useDispatch } from 'react-redux';
 import * as userAction from 'redux/user/user.actions';
@@ -15,7 +17,8 @@ import {
 const Header = () => {
 
 	// Component State
-	const [ display, setDisplay ] = useState( false );
+	// const [ display, setDisplay ] = useState( false );
+	const [ display, toggleDisplay	] = useToggle( false );
 
 	// Redux State
 	const dispatch = useDispatch();
@@ -27,7 +30,7 @@ const Header = () => {
 
 		dispatch( userAction.setActive( user ));
 
-		setDisplay( !display );
+		toggleDisplay();
 
 		return console.log( user );
 	};
@@ -41,13 +44,13 @@ const Header = () => {
 				<h1 className={'app-logo'}> {'AWS'} </h1>
 
 				<Avatar className={'user-avatar'}
-					onMouseDown={() => setDisplay( !display )}
+					onMouseDown={() => toggleDisplay()}
 				>	{ userActive ? userActive.user_name.charAt(0) : 'U' }
 				</Avatar>
 
 				<Popover className={'user-change-dropdown'}
 					open={ display }
-					onClose={ () => setDisplay( !display) }
+					onClose={ () => toggleDisplay( false ) }
 					anchorEl={ document.querySelector('.user-avatar') }
 					anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
 					transformOrigin={{ vertical: 'top', horizontal: 'right' }}

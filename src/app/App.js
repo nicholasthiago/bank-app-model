@@ -26,7 +26,7 @@ const App = () => {
 	async function fetchData () {
 		const config = { method:'GET' };
 
-		const response = await fetch(`http://${window.location.hostname}:5000/users`, config ).then( r => r.json() );
+		const response = await fetch(`http://localhost:5000/users`, config ).then( r => r.json() );
 
 		console.log( response );
 		await dispatch( userAction.setList( response.users ) );
